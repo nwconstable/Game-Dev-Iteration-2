@@ -101,9 +101,8 @@ MonoBehaviour:
   bulletSpawn: {fileID: 7531638463110518528}
   fireRate: 1
   turnSpeed: 360
-  range: 20
+  range: 5
   rangeCollider: {fileID: 6338546292700141933}
-  bulletTransform: {fileID: 0}
 --- !u!58 &6338546292700141933
 CircleCollider2D:
   m_ObjectHideFlags: 0
