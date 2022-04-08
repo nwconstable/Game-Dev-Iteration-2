@@ -7,16 +7,22 @@ using UnityEngine.Tilemaps;
 
 public class AddTurret : MonoBehaviour
 {
-    [SerializeField] private Button turretButton;
-    [SerializeField] private TMP_Text buttonText;
+    [SerializeField] private Button landTurretButton;
+    [SerializeField] private Button waterTurretButton;
+    private TMP_Text buttonText;
     private GameObject turret;
     private bool isTurretPlaced;
 
     void Start() {
-        turretButton.onClick.AddListener(() => {
+        landTurretButton.onClick.AddListener(() => {
             //Debug.Log("Turret Button Clicked");
             isTurretPlaced = false;
-            StartCoroutine(TurretPlacer());
+            StartCoroutine(TurretPlacer(landTurretButton));
+        });
+        waterTurretButton.onClick.AddListener(() => {
+            //Debug.Log("Turret Button Clicked");
+            isTurretPlaced = false;
+            StartCoroutine(TurretPlacer(waterTurretButton));
         });
     }
 
@@ -24,12 +30,14 @@ public class AddTurret : MonoBehaviour
 
     }
     
-    private IEnumerator TurretPlacer() {
+    private IEnumerator TurretPlacer(Button button) {
         //Debug.Log("Turret Placer Started");
         yield return null;
+        buttonText = button.GetComponentInChildren<TMP_Text>();
+        string buttonTextString = buttonText.text;
         buttonText.text = "Click Again To Place Turret";
         //Debug.Log("Waited one frame");
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild(button.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
         string turretTag = turretToBuild.GetComponent<CustomTags>().GetAtIndex(0);
         Debug.Log("Turret Tag: " + turretTag);
         //Change the color of all invalid build areas to red
@@ -56,6 +64,12 @@ public class AddTurret : MonoBehaviour
                         isWithinAllowedArea = true;
                         break;
                     }
+                    if (turretTag == "Water") {
+                        if (collider.gameObject.GetComponent<CustomTags>().HasTag("Land")) {
+                            isWithinAllowedArea = false;
+                            break;
+                        }
+                    }
                 }
                 // This part checks whether the turret placement is too close to another turret
                 foreach(GameObject turret in turrets) {
@@ -80,6 +94,6 @@ public class AddTurret : MonoBehaviour
         foreach (GameObject buildArea in BuildManager.instance.GetBuildAreas()) {
             buildArea.GetComponent<Tilemap>().color = Color.white;
         }
-        buttonText.text = "Add New Turret";
+        buttonText.text = buttonTextString;
     }
 }
