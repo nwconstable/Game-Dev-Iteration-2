@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Waypoints
   - Land
+  - Undefined
+  - Turret
   layers:
   - Default
   - TransparentFX

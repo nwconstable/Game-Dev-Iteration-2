@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4705827547334413616}
   - component: {fileID: -4981925568631297475}
   - component: {fileID: 6338546292700141933}
+  - component: {fileID: 731753894970152461}
   m_Layer: 0
   m_Name: Turret_Prefab
-  m_TagString: Land
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,9 +117,24 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.01862976}
   serializedVersion: 2
-  m_Radius: 0.0001
+  m_Radius: 0.3
+--- !u!114 &731753894970152461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6836863172325873414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7153fc9d853d29f44b9160c209459227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Land
+  - Turret
 --- !u!1 &9005548806582785123
 GameObject:
   m_ObjectHideFlags: 0

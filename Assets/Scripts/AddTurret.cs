@@ -14,7 +14,7 @@ public class AddTurret : MonoBehaviour
 
     void Start() {
         turretButton.onClick.AddListener(() => {
-            Debug.Log("Turret Button Clicked");
+            //Debug.Log("Turret Button Clicked");
             isTurretPlaced = false;
             StartCoroutine(TurretPlacer());
         });
@@ -30,18 +30,26 @@ public class AddTurret : MonoBehaviour
         buttonText.text = "Click Again To Place Turret";
         //Debug.Log("Waited one frame");
         GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
-        string turretTag = turretToBuild.tag;
+        string turretTag = turretToBuild.GetComponent<CustomTags>().GetAtIndex(0);
         while(!isTurretPlaced) {
             Vector3 mousePos = Input.mousePosition;
             //Debug.Log("Mouse Position: " + mousePos);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             //Debug.Log("World Position Updated: " + worldPos);
             // Make sure the turret is placed within the allowed areas
+            GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
             bool isWithinAllowedArea = false;
             if(Input.GetMouseButtonDown(0)) {
-                foreach(Collider2D area in allowedAreas) {
-                    if(area.OverlapPoint(worldPos) && area.CompareTag(turretTag)) {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(worldPos, 0.2f);
+                foreach(Collider2D collider in colliders) {
+                    if  (collider.gameObject.GetComponent<CustomTags>().HasTag(turretTag)) {
                         isWithinAllowedArea = true;
+                        break;
+                    }
+                }
+                foreach(GameObject turret in turrets) {
+                    if(Vector2.Distance(turret.transform.position, worldPos) < 0.3f) {
+                        isWithinAllowedArea = false;
                         break;
                     }
                 }
