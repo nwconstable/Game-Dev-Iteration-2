@@ -38,7 +38,7 @@ public class TurretBehavior : MonoBehaviour
         // Turn the turret towrds the mouse (or a target)
         // Vector3 mousePosition = Input.mousePosition;
         Vector3 targetPos = target.transform.position;
-        Debug.Log("Target Position: " + targetPos);
+        //Debug.Log("Target Position: " + targetPos);
         Vector2 direction = targetPos - transform.position;
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         Vector3 targetRotation = new Vector3(0, 0, angle);

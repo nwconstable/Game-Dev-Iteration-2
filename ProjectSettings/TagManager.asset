@@ -7,6 +7,9 @@ TagManager:
   - Bullet
   - Enemy
   - Waypoints
+  - Land
+  - Undefined
+  - Turret
   layers:
   - Default
   - TransparentFX
