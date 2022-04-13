@@ -10,6 +10,11 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+# git push -f can force this file if you absolutely need to, otherwise all
+# edits should be done to prefabs and scripts that can later, if necessary,
+# be hooked up
+/[Aa]ssets/Scenes/GameScreen.unity
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
