@@ -32,7 +32,7 @@ public class AddTurret : MonoBehaviour
     
     private IEnumerator TurretPlacer(Button button) {
         //Debug.Log("Turret Placer Started");
-        yield return null;
+        //yield return null;
         buttonText = button.GetComponentInChildren<TMP_Text>();
         string buttonTextString = buttonText.text;
         buttonText.text = "Click Again To Place Turret";
@@ -62,11 +62,14 @@ public class AddTurret : MonoBehaviour
                 foreach(Collider2D collider in colliders) {
                     if  (collider.gameObject.GetComponent<CustomTags>().HasTag(turretTag) && !(collider.gameObject.GetComponent<CustomTags>().HasTag("Turret"))) {
                         isWithinAllowedArea = true;
+                        Debug.Log("Is in allowed area : " + isWithinAllowedArea);
                         break;
                     }
                     if (turretTag == "Water") {
                         if (collider.gameObject.GetComponent<CustomTags>().HasTag("Land")) {
                             isWithinAllowedArea = false;
+                            Debug.Log("Is water turret and is in water area: " + isWithinAllowedArea);
+                            Debug.Log("Collider Tag: " + collider.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
                             break;
                         }
                     }
@@ -75,6 +78,7 @@ public class AddTurret : MonoBehaviour
                 foreach(GameObject turret in turrets) {
                     if(Vector2.Distance(turret.transform.position, worldPos) < 0.4f) {
                         isWithinAllowedArea = false;
+                        Debug.Log("Is far enough away from another turret: " + isWithinAllowedArea);
                         break;
                     }
                 }
