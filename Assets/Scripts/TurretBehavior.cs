@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurretBehavior : MonoBehaviour
 {
@@ -10,12 +11,34 @@ public class TurretBehavior : MonoBehaviour
     [SerializeField] private float turnSpeed;
     [SerializeField] private float range;
     [SerializeField] private CircleCollider2D rangeCollider;
+    [SerializeField] private Button turretButton;
+    [SerializeField] private Button[] upgradeButtons;
+    private bool upgradeButtonsActive = false;
     private GameObject target;
     private float lastShot = 0;
 
     void Awake() {
         rangeCollider.radius = range;
         //Debug.Log("Turret Range: " + range);
+        foreach(Button button in upgradeButtons) {
+            button.gameObject.SetActive(false);
+        }
+    }
+
+    void Start() {
+        turretButton.onClick.AddListener(() => {
+            if(upgradeButtonsActive) {
+                foreach(Button button in upgradeButtons) {
+                    button.gameObject.SetActive(false);
+                }
+                upgradeButtonsActive = false;
+            } else {
+                foreach(Button button in upgradeButtons) {
+                    button.gameObject.SetActive(true);
+                }
+                upgradeButtonsActive = true;
+            }
+        });
     }
 
     // Update is called once per frame
