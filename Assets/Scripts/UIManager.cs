@@ -8,28 +8,34 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button showButtonsButton;
     [SerializeField] private Button[] buttons;
-    private bool areButtonsShown = false;
+    private bool areButtonsShown;
     private TMP_Text buttonText;
     // Start is called before the first frame update
+
+    void Awake() {
+        areButtonsShown = false;
+        foreach(Button button in buttons) {
+            button.gameObject.SetActive(areButtonsShown);
+        }
+    }
+
+
     void Start()
     {
-        foreach(Button button in buttons) {
-            button.gameObject.SetActive(false);
-        }
         buttonText = showButtonsButton.GetComponentInChildren<TMP_Text>();
         buttonText.text = "Add New Turret";
         showButtonsButton.onClick.AddListener(() => {
             if(areButtonsShown) {
-                foreach(Button button in buttons) {
-                    button.gameObject.SetActive(false);
-                }
                 areButtonsShown = false;
+                foreach(Button button in buttons) {
+                    button.gameObject.SetActive(areButtonsShown);
+                }
                 buttonText.text = "Add New Turret";
             } else {
-                foreach(Button button in buttons) {
-                    button.gameObject.SetActive(true);
-                }
                 areButtonsShown = true;
+                foreach(Button button in buttons) {
+                    button.gameObject.SetActive(areButtonsShown);
+                }
                 buttonText.text = "Hide Turret Buttons";
             }
         });
