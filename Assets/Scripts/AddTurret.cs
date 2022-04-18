@@ -39,7 +39,7 @@ public class AddTurret : MonoBehaviour
         //Debug.Log("Waited one frame");
         GameObject turretToBuild = BuildManager.instance.GetTurretToBuild(button.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
         string turretTag = turretToBuild.GetComponent<CustomTags>().GetAtIndex(0);
-        Debug.Log("Turret Tag: " + turretTag);
+        //Debug.Log("Turret Tag: " + turretTag);
         //Change the color of all invalid build areas to red
         foreach (GameObject buildArea in BuildManager.instance.GetBuildAreas()) {
             if (buildArea.GetComponent<BuildArea>().IsBuildable(turretTag)) {
@@ -62,14 +62,14 @@ public class AddTurret : MonoBehaviour
                 foreach(Collider2D collider in colliders) {
                     if  (collider.gameObject.GetComponent<CustomTags>().HasTag(turretTag) && !(collider.gameObject.GetComponent<CustomTags>().HasTag("Turret"))) {
                         isWithinAllowedArea = true;
-                        Debug.Log("Is in allowed area : " + isWithinAllowedArea);
+                        //Debug.Log("Is in allowed area : " + isWithinAllowedArea);
                         break;
                     }
                     if (turretTag == "Water") {
                         if (collider.gameObject.GetComponent<CustomTags>().HasTag("Land")) {
                             isWithinAllowedArea = false;
-                            Debug.Log("Is water turret and is in water area: " + isWithinAllowedArea);
-                            Debug.Log("Collider Tag: " + collider.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
+                            //Debug.Log("Is water turret and is in water area: " + isWithinAllowedArea);
+                            //Debug.Log("Collider Tag: " + collider.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
                             break;
                         }
                     }
@@ -78,7 +78,7 @@ public class AddTurret : MonoBehaviour
                 foreach(GameObject turret in turrets) {
                     if(Vector2.Distance(turret.transform.position, worldPos) < 0.4f) {
                         isWithinAllowedArea = false;
-                        Debug.Log("Is far enough away from another turret: " + isWithinAllowedArea);
+                        //Debug.Log("Is far enough away from another turret: " + isWithinAllowedArea);
                         break;
                     }
                 }

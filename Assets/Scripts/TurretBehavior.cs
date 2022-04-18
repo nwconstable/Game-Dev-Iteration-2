@@ -13,30 +13,34 @@ public class TurretBehavior : MonoBehaviour
     [SerializeField] private CircleCollider2D rangeCollider;
     [SerializeField] private Button turretButton;
     [SerializeField] private Button[] upgradeButtons;
-    private bool upgradeButtonsActive = false;
+    [SerializeField] private Canvas upgradeCanvas;
+    [SerializeField] private float damage;
+    private bool upgradeButtonsActive;
     private GameObject target;
     private float lastShot = 0;
 
     void Awake() {
         rangeCollider.radius = range;
         //Debug.Log("Turret Range: " + range);
+        upgradeButtonsActive = false;
         foreach(Button button in upgradeButtons) {
-            button.gameObject.SetActive(false);
+            button.gameObject.SetActive(upgradeButtonsActive);
         }
     }
 
     void Start() {
         turretButton.onClick.AddListener(() => {
             if(upgradeButtonsActive) {
-                foreach(Button button in upgradeButtons) {
-                    button.gameObject.SetActive(false);
-                }
                 upgradeButtonsActive = false;
-            } else {
                 foreach(Button button in upgradeButtons) {
-                    button.gameObject.SetActive(true);
+                    button.gameObject.SetActive(upgradeButtonsActive);
                 }
+            } else {
                 upgradeButtonsActive = true;
+                foreach(Button button in upgradeButtons) {
+                    button.gameObject.SetActive(upgradeButtonsActive);
+                }
+                UpgradeTurret();
             }
         });
     }
@@ -57,6 +61,26 @@ public class TurretBehavior : MonoBehaviour
         lastShot += Time.deltaTime;
     }
 
+    private void UpgradeTurret() {
+        foreach(Button button in upgradeButtons) {
+            button.onClick.AddListener(() => {
+                string upgrade = button.gameObject.GetComponent<CustomTags>().GetAtIndex(0);
+                if(upgrade == "Range") {
+                    range += 1;
+                    rangeCollider.radius = range;
+                } else if(upgrade == "RateOfFire") {
+                    fireRate -= 0.1f;
+                } else if(upgrade == "Damage") {
+                    damage += 1;
+                }
+                upgradeButtonsActive = false;
+                foreach(Button button in upgradeButtons) {
+                    button.gameObject.SetActive(upgradeButtonsActive);
+                }
+            });
+        }
+    }
+
     private void TurnToTarget(GameObject target) {
         // Turn the turret towrds the mouse (or a target)
         // Vector3 mousePosition = Input.mousePosition;
@@ -66,6 +90,7 @@ public class TurretBehavior : MonoBehaviour
         float angle = Vector2.SignedAngle(Vector2.up, direction);
         Vector3 targetRotation = new Vector3(0, 0, angle);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), turnSpeed * Time.deltaTime);
+        upgradeCanvas.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     private void Shoot() {
