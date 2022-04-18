@@ -225,7 +225,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &2019879396473968230
 MonoBehaviour:
@@ -602,6 +602,7 @@ MonoBehaviour:
   - {fileID: 6094901308277218515}
   - {fileID: 2800256660417638397}
   upgradeCanvas: {fileID: 8906171491326333779}
+  damage: 0
 --- !u!58 &4082923805436220593
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1172,7 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags:
-  - RateOfFire
+  - FireRate
 --- !u!1 &8771401483707231066
 GameObject:
   m_ObjectHideFlags: 0

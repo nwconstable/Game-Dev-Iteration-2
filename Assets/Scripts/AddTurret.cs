@@ -66,7 +66,7 @@ public class AddTurret : MonoBehaviour
                         break;
                     }
                     if (turretTag == "Water") {
-                        if (collider.gameObject.GetComponent<CustomTags>().HasTag("Land")) {
+                        if (collider.gameObject.GetComponent<CustomTags>().HasTag("Land") || collider.gameObject.GetComponent<CustomTags>().HasTag("Path")) {
                             isWithinAllowedArea = false;
                             //Debug.Log("Is water turret and is in water area: " + isWithinAllowedArea);
                             //Debug.Log("Collider Tag: " + collider.gameObject.GetComponent<CustomTags>().GetAtIndex(0));
