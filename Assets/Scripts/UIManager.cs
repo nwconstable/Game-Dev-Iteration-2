@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     private int treasure;
     public static UIManager instance;
 
-    private int Treasure{
+    public int Treasure{
         get{
             return treasure;
         }
@@ -64,11 +64,17 @@ public class UIManager : MonoBehaviour
         treasureCount.text = Treasure.ToString();
     }
 
-    public void IncrementTreasure() {
-        Treasure += 100;
+    public void IncrementTreasure(int amount = 100) {
+        Treasure += amount;
     }
 
-    public void DecrementTreasure() {
-        Treasure -= 100;
+    public void DecrementTreasure(int amount = 100) {
+        Treasure -= amount;
+    }
+
+    public IEnumerator NotEnoughTreasure(string oldText) {
+        buttonText.text = "Not Enough Treasure";
+        yield return new WaitForSeconds(3);
+        buttonText.text = oldText;
     }
 }
