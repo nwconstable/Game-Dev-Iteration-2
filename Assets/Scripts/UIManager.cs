@@ -8,15 +8,34 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Button showButtonsButton;
     [SerializeField] private Button[] buttons;
+    [SerializeField] private TMP_Text treasureCount;
+    [SerializeField] private int startingTreasure;
     private bool areButtonsShown;
     private TMP_Text buttonText;
-    // Start is called before the first frame update
+    private int treasure;
+    public static UIManager instance;
+
+    private int Treasure{
+        get{
+            return treasure;
+        }
+        set{
+            treasure = value;
+            if(treasure <= 0){
+                LoadingScreen.LoadScene("MainMenu");
+            }
+            UpdateTreasureText();
+        }
+    }
 
     void Awake() {
         areButtonsShown = false;
         foreach(Button button in buttons) {
             button.gameObject.SetActive(areButtonsShown);
         }
+        instance = this;
+        treasure = startingTreasure;
+        UpdateTreasureText();
     }
 
 
@@ -39,5 +58,17 @@ public class UIManager : MonoBehaviour
                 buttonText.text = "Hide Turret Buttons";
             }
         });
+    }
+
+    private void UpdateTreasureText() {
+        treasureCount.text = Treasure.ToString();
+    }
+
+    public void IncrementTreasure() {
+        Treasure += 100;
+    }
+
+    public void DecrementTreasure() {
+        Treasure -= 100;
     }
 }

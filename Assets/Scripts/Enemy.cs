@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 Destroy(gameObject);
+                UIManager.instance.DecrementTreasure();
             }
 
         }
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log("Enemy hit");
             Destroy(gameObject);
             Destroy(other.gameObject);
+            UIManager.instance.IncrementTreasure();
         }
     }
 }
