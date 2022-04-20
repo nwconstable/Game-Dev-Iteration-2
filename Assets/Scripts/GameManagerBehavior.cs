@@ -24,12 +24,22 @@ public class GameManagerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Gold = 1000;
+        Gold = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
+
+    public void SubtractGold(int amount)
+    {
+        gold -= amount;
     }
 }
