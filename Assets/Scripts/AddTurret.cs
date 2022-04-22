@@ -16,13 +16,21 @@ public class AddTurret : MonoBehaviour
     void Start() {
         landTurretButton.onClick.AddListener(() => {
             //Debug.Log("Turret Button Clicked");
-            isTurretPlaced = false;
-            StartCoroutine(TurretPlacer(landTurretButton));
+            if(UIManager.instance.Treasure > 200) {
+                isTurretPlaced = false;
+                StartCoroutine(TurretPlacer(landTurretButton));
+            } else {
+                StartCoroutine(UIManager.instance.NotEnoughTreasure(landTurretButton.GetComponentInChildren<TMP_Text>().text));
+            }
         });
         waterTurretButton.onClick.AddListener(() => {
             //Debug.Log("Turret Button Clicked");
-            isTurretPlaced = false;
-            StartCoroutine(TurretPlacer(waterTurretButton));
+            if(UIManager.instance.Treasure > 200) {
+                isTurretPlaced = false;
+                StartCoroutine(TurretPlacer(waterTurretButton));
+            } else {
+                StartCoroutine(UIManager.instance.NotEnoughTreasure( waterTurretButton.GetComponentInChildren<TMP_Text>().text));
+            }
         });
     }
 
@@ -99,5 +107,6 @@ public class AddTurret : MonoBehaviour
             buildArea.GetComponent<Tilemap>().color = Color.white;
         }
         buttonText.text = buttonTextString;
+        UIManager.instance.DecrementTreasure(200);
     }
 }
