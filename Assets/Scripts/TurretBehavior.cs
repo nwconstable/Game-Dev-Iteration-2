@@ -69,8 +69,10 @@ public class TurretBehavior : MonoBehaviour
                     range += 1;
                     rangeCollider.radius = range;
                 } else if(upgrade == "FireRate") {
-                    fireRate -= 0.1f;
-                    Debug.Log("Fire Rate: " + fireRate);
+                    if (fireRate > 0.1f) {
+                        fireRate -= 0.1f;
+                        Debug.Log("Fire Rate: " + fireRate);
+                    }
                 } else if(upgrade == "Damage") {
                     damage += 1;
                 }
