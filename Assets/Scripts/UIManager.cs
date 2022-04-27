@@ -72,6 +72,10 @@ public class UIManager : MonoBehaviour
         Treasure -= amount;
     }
 
+    public bool HasMoney(int amount) {
+        return amount <= Treasure;
+    }
+
     public IEnumerator NotEnoughTreasure(string oldText) {
         buttonText.text = "Not Enough Treasure";
         yield return new WaitForSeconds(3);

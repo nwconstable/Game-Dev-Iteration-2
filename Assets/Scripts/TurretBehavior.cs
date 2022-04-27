@@ -18,6 +18,7 @@ public class TurretBehavior : MonoBehaviour
     private bool upgradeButtonsActive;
     private GameObject target;
     private float lastShot = 0;
+    private UIManager uiManager;
 
     void Awake() {
         rangeCollider.radius = range;
@@ -26,6 +27,7 @@ public class TurretBehavior : MonoBehaviour
         foreach(Button button in upgradeButtons) {
             button.gameObject.SetActive(upgradeButtonsActive);
         }
+        uiManager = UIManager.instance;
     }
 
     void Start() {
@@ -64,21 +66,26 @@ public class TurretBehavior : MonoBehaviour
     private void UpgradeTurret() {
         foreach(Button button in upgradeButtons) {
             button.onClick.AddListener(() => {
-                string upgrade = button.gameObject.GetComponent<CustomTags>().GetAtIndex(0);
-                if(upgrade == "Range") {
-                    range += 1;
-                    rangeCollider.radius = range;
-                } else if(upgrade == "FireRate") {
-                    if (fireRate > 0.1f) {
-                        fireRate -= 0.1f;
-                        //Debug.Log("Fire Rate: " + fireRate);
+                if(uiManager.HasMoney(200)) {
+                    string upgrade = button.gameObject.GetComponent<CustomTags>().GetAtIndex(0);
+                    if(upgrade == "Range") {
+                        range += 1;
+                        rangeCollider.radius = range;
+                    } else if(upgrade == "FireRate") {
+                        if (fireRate > 0.1f) {
+                            fireRate -= 0.1f;
+                            Debug.Log("Fire Rate: " + fireRate);
+                        }
+                    } else if(upgrade == "Damage") {
+                        damage += 1;
                     }
-                } else if(upgrade == "Damage") {
-                    damage += 1;
-                }
-                upgradeButtonsActive = false;
-                foreach(Button button in upgradeButtons) {
-                    button.gameObject.SetActive(upgradeButtonsActive);
+                    uiManager.DecrementTreasure(200);
+                    upgradeButtonsActive = false;
+                    foreach(Button button in upgradeButtons) {
+                        button.gameObject.SetActive(upgradeButtonsActive);
+                    }
+                } else {
+                    Debug.Log("Not enough money!");
                 }
             });
         }
