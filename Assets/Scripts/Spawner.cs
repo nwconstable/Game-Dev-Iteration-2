@@ -6,22 +6,15 @@ using TMPro;
 public class Spawner : MonoBehaviour
 {
     public GameObject enemyObjectToSpawn;
-
+    public TMP_Text waveCountText;
     public float timeToSpawn = 5f;
     private float currentTimeToSpawn = 2f;
-
     private float waveCounter = 0;
-
-    public TMP_Text waveCountText;
-
-    void Start()
-    {
-
-    }
+    private int numberOfWaves = 10;
+    
 
     void Update()
     {
-
         if (currentTimeToSpawn <= 0)
         {
             StartCoroutine(SpawnWave());
@@ -35,7 +28,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave() 
     {
-        if(waveCounter < 5)
+        if(waveCounter < numberOfWaves)
         {
             waveCounter++;
             for (int i = 0; i < waveCounter; i++)
