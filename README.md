@@ -1,27 +1,7 @@
-# Iteration 1: Pirate and Dinosaur Tower Defense Game
+# Pirate Booty Defense
 
-## Write down the major aspects of your game that you are the least sure about.
-* Main treasure mechanic. Specifically, ensuring that multiple playstyles are viable.
-* Level design. How to create many waves.
-* Difficulty. How to balance enemies, towers, waves while keeping multiple playstyles in mind.
-* Is it fun?
+![Game Screenshot](https://user-images.githubusercontent.com/70217817/165585617-23120313-c73c-4755-9e09-8ffc5dbaa453.png)
 
-## What are the core game mechanics that need to be fun for your game to work?
-* Variety of playstyles. For example, a high amount of treasure with low defenses, a low amount of treasure with high defenses, or a middle-ground approach.
-* Difficulty in balancing defenses against pirates and dinosaurs. Certain "towers" will be more effective against pirates than dinosaurs and vice-versa.
-* Increasing difficulty as waves progress. Throughout the game, waves will have an increasing number of enemies which will be harder to defeat.
+Prepare to embark on an adventure on the high seas! Pirate Booty Defense is a tower defense game where you have to defend your gold against incoming enemy pirates. Place upgradable towers on land or sea to ward them off. But try not to get overwhelmed by pirates because if you lose all your gold, it's game over!
 
-## What are the key features you would need to have in place to test out those mechanics?
-* Treasure bar that can be spent on defense.
-* Basic enemies that spawn in waves.
-* Basic towers that can be placed on a level.
-
-## Can you imagine a bare bones prototype that would allow you to test just those mechanics?
-Probably, yeah.
-
-## Write down a list of features you would like to have implemented by the end of the first iteration.
-* Have a basic level to play on.
-* Have at least one wave.
-* Be able to place towers.
-* Have a treasure mechanic (effectively health bar).
-* Have a basic enemy that spawns.
+Credit goes to: Noah, Hoomz, Jacob, and Michael for developing the game, and [Kenney](https://www.kenney.nl/) for providing free creative commons art assets.
