@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
     }
 
     public bool HasMoney(int amount) {
-        return amount <= Treasure;
+        return amount < Treasure;
     }
 
     public IEnumerator NotEnoughTreasure(string oldText) {
