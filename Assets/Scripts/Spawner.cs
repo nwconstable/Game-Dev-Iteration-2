@@ -6,11 +6,11 @@ using TMPro;
 public class Spawner : MonoBehaviour
 {
     public static int enemiesAlive = 0;
-    public GameObject enemyObjectToSpawn;
+    public Wave[] waves;
     public TMP_Text waveCountText;
     public float timeToSpawn = 5f;
     private float currentTimeToSpawn = 2f;
-    private float waveCounter = 0;
+    private int waveCounter = 0;
     private int numberOfWaves = 10;
     
 
@@ -34,21 +34,29 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnWave() 
     {
+        Wave wave = waves[waveCounter];
         if(waveCounter < numberOfWaves)
         {
-            waveCounter++;
-            for (int i = 0; i < waveCounter; i++)
+            for (int i = 0; i < wave.count; i++)
             {
-                SpawnEnemy();
-                yield return new WaitForSeconds(0.5f);
+                SpawnEnemy(wave.enemy);
+                yield return new WaitForSeconds(1f / wave.rate);
             }
             yield return new WaitForSeconds(10f);
         }
+        waveCounter++;
+
+        if (waveCounter == waves.Length)
+        {
+            //LoadingScreen.LoadScene("MainMenu"); //i want to put a victory scene here eventually 
+            Debug.Log("You Win");
+            this.enabled = false;
+        }
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy(GameObject enemy)
     {
-        Instantiate(enemyObjectToSpawn, transform.position, transform.rotation);
+        Instantiate(enemy, transform.position, transform.rotation);
         enemiesAlive++;
     }
 
