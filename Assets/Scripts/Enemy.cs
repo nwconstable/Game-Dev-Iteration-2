@@ -5,12 +5,33 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
+    public int health = 100;
     private Waypoints Wpoints;
     private int waypointIndex;
 
     void Start()
     {
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static void DamageEnemy(Transform enemyShip)
+    {
+        Enemy e = enemyShip.GetComponent<Enemy>();
+
+        if (e != null)
+        {
+            e.TakeDamage(50); //for now hard coded damage number
+        }
     }
 
     void Update()
@@ -31,7 +52,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-                UIManager.instance.DecrementTreasure();
+                UIManager.instance.DecrementTreasure(); //ship has reached island
             }
 
         }
@@ -40,15 +61,12 @@ public class Enemy : MonoBehaviour
 
     }
 
-
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            //Debug.Log("Enemy hit");
-            Destroy(gameObject);
-            Destroy(other.gameObject);
+            DamageEnemy(transform); //SHOULD: impact the ship for damage, kilL if ship damage is zero DOES: destroy ships imediately.
+            Destroy(other.gameObject); //destroys bullet after it hits an enemy ship 
             UIManager.instance.IncrementTreasure();
         }
     }
