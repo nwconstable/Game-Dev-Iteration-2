@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            UIManager.instance.IncrementTreasure();
+            Spawner.enemiesAlive--;
         }
     }
 
@@ -49,10 +51,11 @@ public class Enemy : MonoBehaviour
             {
                 waypointIndex++;
             }
-            else
+            else //ship has reached island
             {
                 Destroy(gameObject);
-                UIManager.instance.DecrementTreasure(); //ship has reached island
+                UIManager.instance.DecrementTreasure();
+                Spawner.enemiesAlive--;
             }
 
         }
@@ -65,9 +68,9 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            DamageEnemy(transform); //SHOULD: impact the ship for damage, kilL if ship damage is zero DOES: destroy ships imediately.
+            DamageEnemy(transform); //impact the ship for damage, kill if ship damage is zero
             Destroy(other.gameObject); //destroys bullet after it hits an enemy ship 
-            UIManager.instance.IncrementTreasure();
+            //inc treasure method now called when ship is destroyed 
         }
     }
 }

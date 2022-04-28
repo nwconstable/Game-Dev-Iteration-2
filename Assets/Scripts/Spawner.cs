@@ -5,6 +5,7 @@ using TMPro;
 
 public class Spawner : MonoBehaviour
 {
+    public static int enemiesAlive = 0;
     public GameObject enemyObjectToSpawn;
     public TMP_Text waveCountText;
     public float timeToSpawn = 5f;
@@ -15,11 +16,16 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
+        if(enemiesAlive > 0)
+        {
+            return;
+        }
+
         if (currentTimeToSpawn <= 0)
         {
             StartCoroutine(SpawnWave());
             currentTimeToSpawn = timeToSpawn;
-
+            return;
         }
         currentTimeToSpawn -= Time.deltaTime;
 
@@ -43,6 +49,7 @@ public class Spawner : MonoBehaviour
     void SpawnEnemy()
     {
         Instantiate(enemyObjectToSpawn, transform.position, transform.rotation);
+        enemiesAlive++;
     }
 
 
