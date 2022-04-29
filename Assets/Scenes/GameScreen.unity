@@ -252,9 +252,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0004bdb7b0be94ca78ede73dfb18bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyObjectToSpawn: {fileID: 5683605700336764157, guid: 2c0cb70d668c75643ac9e6d70447f60e, type: 3}
-  timeToSpawn: 2
+  waves:
+  - enemy: {fileID: 5683605700336764157, guid: 2c0cb70d668c75643ac9e6d70447f60e, type: 3}
+    count: 1
+    rate: 1
+  - enemy: {fileID: 5683605700336764157, guid: 2c0cb70d668c75643ac9e6d70447f60e, type: 3}
+    count: 2
+    rate: 1
+  - enemy: {fileID: 5683605700336764157, guid: 2c0cb70d668c75643ac9e6d70447f60e, type: 3}
+    count: 3
+    rate: 1
   waveCountText: {fileID: 1530939183}
+  timeToSpawn: 2
 --- !u!4 &433409747
 Transform:
   m_ObjectHideFlags: 0
