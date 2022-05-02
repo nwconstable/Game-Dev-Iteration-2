@@ -16,7 +16,7 @@ public class AddTurret : MonoBehaviour
     void Start() {
         landTurretButton.onClick.AddListener(() => {
             //Debug.Log("Turret Button Clicked");
-            if(UIManager.instance.Treasure > 200) {
+            if(UIManager.instance.Treasure > 800) {
                 isTurretPlaced = false;
                 StartCoroutine(TurretPlacer(landTurretButton));
             } else {
@@ -25,7 +25,7 @@ public class AddTurret : MonoBehaviour
         });
         waterTurretButton.onClick.AddListener(() => {
             //Debug.Log("Turret Button Clicked");
-            if(UIManager.instance.Treasure > 200) {
+            if(UIManager.instance.Treasure > 800) {
                 isTurretPlaced = false;
                 StartCoroutine(TurretPlacer(waterTurretButton));
             } else {
@@ -107,6 +107,6 @@ public class AddTurret : MonoBehaviour
             buildArea.GetComponent<Tilemap>().color = Color.white;
         }
         buttonText.text = buttonTextString;
-        UIManager.instance.DecrementTreasure(200);
+        UIManager.instance.DecrementTreasure(800);
     }
 }

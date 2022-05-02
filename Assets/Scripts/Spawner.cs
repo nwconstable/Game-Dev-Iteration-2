@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     public TMP_Text waveCountText;
     public float timeToSpawn = 5f;
     private float currentTimeToSpawn = 2f;
-    private int waveCounter = 1;
+    private int waveCounter = 0;
     private int numberOfWaves = 10;
     
 
